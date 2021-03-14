@@ -10,8 +10,8 @@
       integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
       crossorigin="anonymous"
     />
-    <link rel="stulesheet" href="./dist/style.css" />
-    <title>Team Profile Generator</title>
+    <link rel="stylesheet" href="./dist/style.css" />
+    <title>${finalTeam[0]}</title>
   </head>
 
   <body>
@@ -21,27 +21,28 @@
 
     <div class="card-container">
       <div class="card-top">
-        <h2>${fullTeam[i].name}</h2>
-        <h2>${fullTeam[i].title}</h2>
+        <h2>${finalTeam[i].name}</h2>
+        <h2>${finalTeam[i].title}</h2>
       </div>
 
       <div class="card-bottom">
-        <p>Employee ID:</p>
+        <p>Employee ID: ${finalTeam[i].id}</p>
         <p>
-          Email:
+          email: <a href="mailto:${finaTeam[i].email}">${finalTeam[i].email}</a>
           <a href="https://github.com/${finalTeam[i].github}"
-            >${fullTeam[i].github}</a
+            >${finalTeam[i].github}</a
           >
         </p>
       </div>
     </div>
-    <p>${fullTeam[i].office</p>
-    <p>
-      Email:
-      <a href="https://github.com/${finalTeam[i].github}"
-        >${fullTeam[i].github}</a
-      >
-    </p>
+    <div>
+      <p>${finalTeam[i].office</p>
+      <p>
+        Email:<a href="https://github.com/${finalTeam[i].github}"
+          >${finalTeam[i].github}</a
+        >
+      </p>
+    </div>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
