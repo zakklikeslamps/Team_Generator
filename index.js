@@ -1,14 +1,14 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 //const style = require("./dist/style");
-const { clear } = require("console");
+const {clear} = require("console");
 
 const Employee = require("./lib/employee");
 const Engineer = require("./lib/engineer");
 const Manager = require("./lib/manager");
 const Intern = require("./lib/intern");
 
-const { countListener} = require("events");
+const {countListener} = require("events");
 //const Choices = require("inquirer/lib/objects/choices");
 
 let finalTeam = [];
@@ -185,11 +185,41 @@ function addManager() {
             </p>
             `
             if (finalTeam[i].officeNumber) {
-                object += `
+                object += `<p>officeNumber: ${finalTeam[i].officeNumber}</p>
                 `
             }
+
+            if (finalTeam[i].github) {
+                object += `<p>github: <a href="https://github.com/${finalTeam[i].github}">${finalTeam[i].github}</p>
+                `
+            }
+
+            if (finalTeam[i].school) {
+                object += `<p>school: ${finalTeam[i].school}</p>
+                `
+            }
+
+            object += `
+            </div>
+            </div>
+            `
+
+            htmlArray.push(object);
         }
+
+        const htmlEnd = `
+        </div>
+        </body>
+        </html>
+        `
+
+        htmlArray.push(htmlEnd);
+        fs.writeFile(`./dist/${finalTeam[0]}.html`, htmlArray.join(""), function(err) {
+
+        })
     }
+
+    init()
     
         /*function addMembers() {
             inquirer.prompt([{
@@ -219,4 +249,4 @@ function addManager() {
 
 
 
-    init()
+    
