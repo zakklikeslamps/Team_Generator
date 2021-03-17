@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-//const style = require("./dist/style");
+const style = require("./assets/style.css");
 const {clear} = require("console");
 
 const Employee = require("./lib/employee");
@@ -14,46 +14,51 @@ const {countListener} = require("events");
 let finalTeam = [];
 
 function init() {
-    inquirer.prompt([{
+    inquirer.prompt([
+        {
+        type: 'input',
         message: "Welcome! Please insert your Team Name.",
         name: "teamName"
-    }
+        }
     ])
-
     .then(function (data) {
-    let teamName = data.teamName
-    finalTeam.push(teamName)
-    addManager();
+        let teamName = data.teamName
+        finalTeam.push(teamName)
+        addManager();
     })
 }
 
 function addManager() {
     inquirer.prompt([
         {
+        type: 'input',
         message: "What is your manager's name?",
         name: "name"
         },
 
         {
+        type: 'input',
         message: "What is your manager's email address?",
         name: "email"
         },
 
         {
+        type: 'input',
         message: "What is your manager's office number?",
-        name: "office"
+        name: "officeNumber"
         }
     ])
-
     .then(function (data) {
+        console.log('DATA --> ', data)
         const name = data.name
-        const id= 01
         const email = data.email
         const office = data.office
-        const newMember = new Manager(name, id, email, office)
+        //ERROR V
+        const newMember = new Manager(name, email, office);
+        console.log('NEW MEMBER ---> ', newMember)
         finalTeam.push(newMember)
         addMembers();
-        })
+    })
 }
 
     function addMembers() {
@@ -85,16 +90,19 @@ function addManager() {
     function addEngineer() {
         inquirer.prompt([
             {
+            type: 'input',
             message: "What is your engineer's name?",
             name: "name"
             },
     
             {
+            type: 'input',
             message: "What is your engineer's email address?",
             name: "email"
             },
     
             {
+            type: 'input',
             message: "What is your engineer's Github account?",
             name: "github"
             }
@@ -114,16 +122,19 @@ function addManager() {
     function addIntern() {
         inquirer.prompt([
             {
+            type: 'input',
             message: "What is your intern's name?",
             name: "name"
             },
     
             {
+            type: 'input',
             message: "What is your intern's email address?",
             name: "email"
             },
     
             {
+            type: 'input',
             message: "What school does your intern attend?",
             name: "school"
             }
@@ -143,7 +154,7 @@ function addManager() {
     function buildTeam() {
         console.log("You have done well. The emperor will be most pleased with you. ")
 
-        let html = []
+        let buildHtml = []
         let htmlStart = `
         <!DOCTYPE html>
         <html lang="en">
@@ -168,7 +179,7 @@ function addManager() {
 
         <div class="card-container">
         `
-        html.push(htmlStart);
+        buildHtml.push(htmlStart);
         for (let i = 1; i < finalTeam.length; i++) {
             let object = `
             <div class="card-container">
@@ -179,7 +190,7 @@ function addManager() {
             <div class="card-bottom">
             <p>Employee ID: ${finalTeam[i].id}</p>
             <p>
-              email: <a href="mailto:${finaTeam[i].email}">${finalTeam[i].email}</a>
+              email: <a href="mailto:${finalTeam[i].email}">${finalTeam[i].email}</a>
               <a href="https://github.com/${finalTeam[i].github}"
                 >${finalTeam[i].github}</a>
             </p>
@@ -204,7 +215,7 @@ function addManager() {
             </div>
             `
 
-            htmlArray.push(object);
+            buildHtml.push(object);
         }
 
         const htmlEnd = `
@@ -213,8 +224,8 @@ function addManager() {
         </html>
         `
 
-        htmlArray.push(htmlEnd);
-        fs.writeFile(`./dist/${finalTeam[0]}.html`, htmlArray.join(""), function(err) {
+        buildHtml.push(htmlEnd);
+        fs.writeFile(`./dist/${finalTeam[0]}.html`, buildHtml.join(""), function(err) {
 
         })
     }
