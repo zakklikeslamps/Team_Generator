@@ -52,7 +52,7 @@ function addManager() {
         console.log('DATA --> ', data)
         const name = data.name
         const email = data.email
-        const office = data.office
+        const office = data.officeNumber
         //ERROR V
         const newMember = new Manager(name, email, office);
         console.log('NEW MEMBER ---> ', newMember)
